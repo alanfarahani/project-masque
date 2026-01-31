@@ -1,3 +1,13 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/TheaterUIuss.uss?fileID=7433441132597879392&amp;guid=285b995ffa1beec4580ab37b6f4be8ec&amp;type=3#TheaterUIuss"/>
+    <ui:VisualElement name="mainContainer" style="flex-grow: 1;">
+        <ui:VisualElement name="mainTheater" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;"/>
+        <ui:VisualElement name="sideBar" style="flex-grow: 1; position: absolute; width: 25%; height: 100%; background-image: url(&quot;project://database/Assets/Art/UI/panel-border-005.png?fileID=6362706393618368774&amp;guid=18bd411e6e8a9cd40aa93b05bf5d6aef&amp;type=3#panel-border-005_0&quot;);">
+            <ui:VisualElement name="maskButton" class="mask-button" style="flex-grow: 1; position: absolute; width: 146px; height: 213px; background-image: url(&quot;project://database/Assets/Art/Masks/Mask_Angry_1.psd?fileID=-5180551329613312994&amp;guid=9e63c5a8ecda9674d91bc332892b9afc&amp;type=3#Mask_Angry_1_0&quot;); top: 206px; left: 52px;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="speakingCharBubble" style="flex-grow: 1; position: absolute; width: 725px; height: 221px; background-image: url(&quot;project://database/Assets/Art/UI/panel-border-022.png?fileID=-507163760535440908&amp;guid=ddceeced4c1583b459f824089163a639&amp;type=3#panel-border-022_0&quot;); top: 320px; left: 1150px;">
+            <ui:VisualElement name="speakingCharBubbleInner" style="flex-grow: 1; background-color: rgb(95, 117, 137); width: 699px; height: 204px; position: absolute; align-self: center; top: 8px; left: 8px; border-top-width: 10px; border-right-width: 10px; border-bottom-width: 10px; border-left-width: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="speakingChar" style="flex-grow: 1; position: absolute; left: 559px; background-image: url(&quot;project://database/Assets/Art/Characters/fm01-body.png?fileID=65608665040863366&amp;guid=5ac54b938bef5af40a6fca98c88b6819&amp;type=3#fm01-body_0&quot;); width: 567px; height: 922px; top: 151px;"/>
+    </ui:VisualElement>
 </ui:UXML>
