@@ -10,7 +10,7 @@
 
 */
 
-LIST MASKS = (flirty), (angry), brooding, bubbly, jock, bandgeek, none
+LIST MASKS = (flirty), (angry), (brooding), (bubbly), jock, bandgeek, none
 
 VAR last_choice = none
 
@@ -32,21 +32,73 @@ VAR jock_unhapiness = 0
             -bubbly: YOU: I can't wait! I love sportsball!
         }
     
-        {last_choice == flirty or last_choice == brooding: 
-            Whatever! #char: jock #response: unhappy
-        - else:
-            You're the best.
+        {last_choice == bubbly or last_choice == angry: 
+            JOCK: You're the best.
             ~jock_happiness++
+            -> encounter_jock_crush_team
+        - else:
+            JOCK: Whatever! #char: jock #response: unhappy
+            ~jock_happiness--
+            -> encounter_jock_crush_team
+        }
+
+    =encounter_jock_crush_team
+        JOCK: We are going to crush the other team!
+
+        ->masks->
+        {last_choice:
+            -angry: YOU: Kill 'em!
+            -flirty: YOU: You're SO strong
+            -brooding: YOU: As if
+            -bubbly: YOU: Hehe
         }
     
+        {last_choice == flirty or last_choice == brooding: 
+            ~jock_happiness--
+        - else:
+            ~jock_happiness++
+        }
+
+        -> encounter_you_1
     
+    =encounter_you_1
+        ->masks->
+        {last_choice:
+            -angry: YOU: I hate this school
+                -> encounter_school_spirit
+            -flirty: YOU: Are you going to the party, Friday?
+                -> encounter_jack_party
+            -brooding: YOU: ...
+                -> encounter_school_spirit
+            -bubbly: YOU: Are you going to the party, Friday?
+                -> encounter_jack_party
+        }
 
-//<-masks
-//+->
+    =encounter_school_spirit
+        JOCK: Where's the school spirit?
 
-//
+        ->masks->
+        {last_choice:
+            -angry: YOU: Up your butt
+                -> encounter_school_spirit
+            -flirty: YOU: Wherever you want it
+                -> encounter_jock_confused
+            -brooding: YOU: Dead... like regular spirits
+                -> encounter_school_spirit
+            -bubbly: YOU: Rah, Rah, Rah!
+                -> encounter_jock_excited
+        }
 
+    =encounter_jack_party
+        JACK: I need my eight hours before game day
+        -> encounter_you_1
 
+    =encounter_jock_confused
+        JOCK: What?
+        -> encounter_you_1
+
+    =encounter_jock_excited
+        JOCK: Let's F'in Go!
 
 -> END
 
