@@ -1,16 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Ink.Runtime;
-using JetBrains.Annotations;
-using Unity.VectorGraphics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
-using UnityEngine.Windows.WebCam;
 
 public class DialogueController : MonoBehaviour
 {
@@ -20,9 +12,12 @@ public class DialogueController : MonoBehaviour
     public Story story;
     public static event Action<Story> OnCreateStory;
 
+	private ElemAnims animElem;
+	private TagOperations fmtTag;
+
     void Awake()
     {
-        
+        StartGame();
     }
 
     private void StartGame () {
@@ -52,7 +47,7 @@ public class DialogueController : MonoBehaviour
 		
 	}
 
-    	private IEnumerator StoryContinues()
+    private IEnumerator StoryContinues()
 	{
 		
 		if (story.canContinue)
@@ -104,16 +99,14 @@ public class DialogueController : MonoBehaviour
 				else
 				{
 					Debug.Log("waiting for click");
-					registerClicktoAdvance();
+					//registerClicktoAdvance();
 				}
 			}
 			
 			yield return null;
 	}
-
     private void DisplayChoices()
 	{
-		is_choice = true;
 
 		//unregisterClicktoAdvance();
 
@@ -143,18 +136,27 @@ public class DialogueController : MonoBehaviour
 			}
 	}
 
-    void registerClicktoAdvance()
+    void registerClicktoAdvance(Choice choice, string text)
     {
         Button leave_gear = new Button() { text = text };
 		
 		leave_gear.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
     }
 
-    public string goToKnot(string knot_name)
+    public void goToKnot(string knot_name)
 	{
 		story.ChoosePathString(knot_name);
-        return fetchDialogue();
+        AdvanceStory();
 
+	}
+
+	    private void OnClickChoiceButton(ClickEvent evt, Choice choice) {
+		evt.StopPropagation();
+
+		story.ChooseChoiceIndex (choice.index);	
+
+
+		AdvanceStory();
 	}
 
     public void updateInkVar(string varName, int varVal)

@@ -6,7 +6,7 @@ public class UiController
     private UIDocument document;
 	
 	//game start is really debug, TODO update this
-	public mainContainer MainContainer { get; private set; }
+	public VisualElement mainContainer { get; private set; }
     
     public UiController(UIDocument doc)
 	{
@@ -15,7 +15,7 @@ public class UiController
 
     public void exposeGameStartUI()
     {
-        MainContainer = document.rootVisualElement.Q("mainContainer");
+        mainContainer = document.rootVisualElement.Q("mainContainer");
     }
 
 
