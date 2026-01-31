@@ -1,0 +1,12 @@
+:root {
+}
+
+.mask-button {
+}
+
+.mask-button:hover {
+    scale: 1.2 1.2;
+    transition-property: scale;
+    transition-timing-function: ease-out;
+    transition-duration: 1s;
+}
