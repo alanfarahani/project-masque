@@ -5,7 +5,7 @@ public class UiController: MonoBehaviour
 {
     private UIDocument document;
 
-    private string chooseCharacterText = "Choose a character.";
+    //private string chooseCharacterText = "Choose a character.";
 
     private string jjText = 
 @"You know, if you want people to like you more, you could try flirting with them a little.
@@ -38,6 +38,10 @@ Keep that in mind.";
 
     public VisualElement conversationContainer {get; private set;}
 
+    public VisualElement charJoanne {get; private set;}
+    public VisualElement charKevin {get; private set;}
+    public VisualElement charVanessa {get; private set;}
+
     public void exposeGameStartUI()
     {
         document = GetComponent<UIDocument>();
@@ -53,6 +57,12 @@ Keep that in mind.";
         charSelectionContainer = document.rootVisualElement.Q("charSelectionContainer");
 
         conversationContainer = document.rootVisualElement.Q("conversationContainer");
+
+        charJoanne = document.rootVisualElement.Q("charJoanne");
+
+        charKevin = document.rootVisualElement.Q("charKevin");
+
+        charVanessa = document.rootVisualElement.Q("charVanessa");
     }
 
     void Awake()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Ink.Runtime;
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -14,9 +15,16 @@ public class DialogueController : MonoBehaviour
 
 	private ElemAnims animElem;
 	private TagOperations fmtTag;
+	private SceneChanger changeScene;
+	private UiController uiItems;
 
     void Awake()
     {
+		fmtTag = new TagOperations();
+		animElem = new ElemAnims();
+		changeScene = new SceneChanger(this);
+		uiItems = GameObject.FindGameObjectsWithTag("mainUI")[0].GetComponent<UiController>();
+
         StartGame();
     }
 
@@ -24,18 +32,11 @@ public class DialogueController : MonoBehaviour
 		
 		story = new Story(inkJSONAsset.text);
 
-		//SceneChangeManager.currentGamePhase = "debug";
-
-		// external functions that will interact with ink
-		//inkExternals.BindExternals(story);
-		//inkObservers.ObserverInkVars(story);
+		SceneChanger.currentGamePhase = "character-selection";
 
 		if (OnCreateStory != null) OnCreateStory(story);
-		//
 
-		//uiInit.exposeGameStartUI();
-		//uiInit.exposeExcursionUI();
-		//uiInit.exposeCampUI();
+		//uiItems.exposeGameStartUI();
 
 		AdvanceStory();
 	}
@@ -75,7 +76,7 @@ public class DialogueController : MonoBehaviour
 
 					Debug.Log(this_tag);
 			
-					//yield return StartCoroutine(changeScene.SceneChange(this_tag_type, this_tag_prop));
+					yield return StartCoroutine(changeScene.SceneChange(this_tag_type, this_tag_prop));
 				}
 			}
 
@@ -121,19 +122,52 @@ public class DialogueController : MonoBehaviour
 						Choice choice = current_choices[i];
 
 						var choice_text = choice.text.Trim();
+						Debug.Log("Choice: " + choice_text);
+						
+						string choice_tag = "";
 
-						if(choice.tags != null)
-						{
-						foreach (string item in choice.tags)
+							if(choice.tags != null)
 							{
-								Debug.Log("Choice tags: " + item);
-							}	
-						}
+								foreach (string item in choice.tags)
+									{
+										Debug.Log("Choice tags: " + item);
+										choice_tag = item;
+									}	
+							}
 		
-						//formatRelevantChoices(choice_text, choice, i);
+						formatRelevantChoices(choice_text, choice, choice_tag);
 
 					}
 			}
+	}
+
+	private void formatRelevantChoices(string choice_text, Choice choice, string choice_tag){
+
+		if(SceneChanger.currentGamePhase == "character-selection"){
+			formatCharSelect(choice, choice_tag);
+		}
+
+		if(SceneChanger.currentGamePhase == "conversation"){
+			
+		}
+
+	}
+
+	void formatCharSelect(Choice choice, string choice_tag){
+		string this_tag_type = fmtTag.getTagType(choice_tag);
+		string this_tag_prop = fmtTag.getTagProp(choice_tag);
+
+		if(this_tag_prop == "joanne"){
+			uiItems.charJoanne.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
+		}
+
+		if(this_tag_prop == "kevin"){
+			uiItems.charKevin.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
+		}
+		
+		if(this_tag_prop == "vanessa"){
+			uiItems.charKevin.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
+		}
 	}
 
     void registerClicktoAdvance(Choice choice, string text)
@@ -150,7 +184,7 @@ public class DialogueController : MonoBehaviour
 
 	}
 
-	    private void OnClickChoiceButton(ClickEvent evt, Choice choice) {
+	private void OnClickChoiceButton(ClickEvent evt, Choice choice) {
 		evt.StopPropagation();
 
 		story.ChooseChoiceIndex (choice.index);	

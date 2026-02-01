@@ -2,7 +2,7 @@ using System.Collections;
 using Unity;
 using UnityEngine;
 
-public class SceneChanger : MonoBehaviour
+public class SceneChanger
 {
     private DialogueController dialogueController;    
 
@@ -12,9 +12,9 @@ public class SceneChanger : MonoBehaviour
 
 	public static string currentGamePhase;
 
-    public SceneChanger(UiController uiItems, DialogueController dialogueController){
-        this.uiItems = uiItems;
+    public SceneChanger(DialogueController dialogueController){
         this.dialogueController = dialogueController;
+        uiItems = GameObject.FindGameObjectsWithTag("mainUI")[0].GetComponent<UiController>();
     	animElem = new ElemAnims();
     }
 

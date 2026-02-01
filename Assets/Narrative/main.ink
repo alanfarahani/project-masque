@@ -33,13 +33,13 @@ INCLUDE systems/topic_engine.ink
 === character_selection
     #start: character-selection
 
-    +[Joanne Jordan] #character: joanne
+    +[Joanne Jordan #character: joanne] 
         #start: conversation
         -> select(->evaluate_topic) -> joanne
-    +[Vanessa Ruiz] #character: vanessa
+    +[Vanessa Ruiz  #character: vanessa]
         #start: conversation
         -> select(->evaluate_topic) -> vanessa
-    +[Kevin Dreezy] #character: kevin
+    +[Kevin Dreezy #character: kevin]
         #start: conversation
         -> select(-> evaluate_topic) -> kevin
 
