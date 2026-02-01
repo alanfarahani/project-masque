@@ -100,7 +100,7 @@
             KEVIN: <bold>This is serious for me.</bold>
             KEVIN: If I fail, I won't be able to --
             KEVIN: Nevermind.
-        +{have_mask(cool)}[YOU: Don't worry, it's not like it matters.]
+        +{have_mask(brooding)}[YOU: Don't worry, it's not like it matters.]
             KEVIN: How can you be so chill about it?
             KEVIN: <bold>This is serious for me.</bold>
             KEVIN: If I fail, I won't be able to --
@@ -129,7 +129,7 @@
             KEVIN: The precision. The elegance. It's like a </bold>modern dance at high speed.</bold>
             KEVIN: Don't think that changes the exam, though.
             KEVIN: Whatever.
-        +{have_mask(cool)}[YOU: Just don't try.]
+        +{have_mask(brooding)}[YOU: Just don't try.]
             KEVIN: What are you talking about?
             KEVIN: <bold>This is serious for me.</bold>
             KEVIN: I won't be able to --
@@ -145,3 +145,12 @@
         }
     - ->->
 - -> DONE
+
+/** 
+Points to uncover:
+[ ] wants to be a modern dancer
+[ ] live F1
+[ ] scared of grandma dying
+[ ] being seen like he cares
+
+**/
