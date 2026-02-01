@@ -114,7 +114,8 @@
             ~get_unlock(vanessa_unlocks, nerd)
             ~get_mask(bubbly)
         +{have_mask(brooding)}[YOU: If you care about that kind of stuff.]
-            VANESSA: It's like he's TRYING to ruin our fun.
+            VANESSA: Most people don't think I care.
+            VANESSA: One day, though, <bold>I'm going to be an astronaut</bold>.
         +{have_mask(angry)}[YOU: Yeah, what a jerk!]
             VANESSA: It's like he's TRYING to ruin our fun.
         +{have_mask(bubbly)}[YOU: There's a science test? Let's get our hair done together.]
@@ -134,9 +135,9 @@
 
 /** 
 Points to uncover:
-[ ] wants to be an astronaut
-[ ] loves D&D
+[x] wants to be an astronaut
+[x] loves D&D
 [ ] scared of ex-boyfriend
-[ ] insecure about being seen as a nerd
+[x] insecure about being seen as a nerd
 
 **/
