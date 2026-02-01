@@ -117,7 +117,7 @@
                 JOANNE: <bold>I love my cats. They keep me grounded.</bold>
             ~get_unlock(joanne_unlocks, cats)
             ~get_mask(angry)
-        +{have_mask(flirty) and not has_unlock(joanne_unlocks(joanne_unlocks, bakery))} [YOU: And I'm locked in on you. WINK.]
+        +{have_mask(flirty) and not has_unlock(joanne_unlocks, bakery)} [YOU: And I'm locked in on you. WINK.]
             JOANNE: What can I say? I'm tasty. Like a blueberry champagne cup cake. 
             JOANNE: Ooh, that gives me such a good idea for a new recipe. 
             JOANNE: <bold>Can't wait to try it out.</bold> 
