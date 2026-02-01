@@ -58,6 +58,13 @@
     min-height: 20%;
     max-height: 10%;
     position: relative;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    -unity-font-definition: url("project://database/Library/unity%20default%20resources?fileID=10102&guid=0000000000000000e000000000000000&type=0#LegacyRuntime");
 }
 
 .choice-button:hover {
@@ -73,4 +80,36 @@
 
 .char-selector-bttn:hover {
     scale: 1.2 1.2;
+}
+
+.wrap-label {
+    white-space: normal;
+}
+
+.fade {
+    transition-property: opacity;
+    transition-duration: 1.5s;
+    transition-timing-function: ease-out;
+}
+
+.invis {
+    opacity: 0;
+    position: absolute;
+    left: auto;
+    align-self: center;
+    width: 1214%;
+    height: 1076%;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+
+.dim {
+    opacity: 50;
+}
+
+.vis {
+    opacity: 100;
 }

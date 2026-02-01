@@ -18,6 +18,8 @@ public class DialogueController : MonoBehaviour
 	private SceneChanger changeScene;
 	private UiController uiItems;
 
+	bool is_choice = false;
+	
     void Awake()
     {
 		fmtTag = new TagOperations();
@@ -86,6 +88,12 @@ public class DialogueController : MonoBehaviour
 
 			//fmtText.formatTextandAdvance(current_line, SceneChangeManager.currentGamePhase);
 
+			if(SceneChanger.currentGamePhase == "conversation"){
+				Debug.Log("in conversation");
+				string this_line = current_line.Trim();
+				uiItems.SetCharacterText(this_line);
+			}
+
 			//CheckNullText();
 			
 				if (!story.canContinue && story.currentChoices.Count > 0)
@@ -100,7 +108,7 @@ public class DialogueController : MonoBehaviour
 				else
 				{
 					Debug.Log("waiting for click");
-					//registerClicktoAdvance();
+					registerClicktoAdvance();
 				}
 			}
 			
@@ -108,7 +116,7 @@ public class DialogueController : MonoBehaviour
 	}
     private void DisplayChoices()
 	{
-
+		is_choice = true;
 		//unregisterClicktoAdvance();
 
 		var current_choices = story.currentChoices;
@@ -141,6 +149,21 @@ public class DialogueController : MonoBehaviour
 			}
 	}
 
+   private void PlayNextLine()
+    {
+		if (!is_choice)
+		{
+			AdvanceStory();	
+		} 
+    }
+	private void registerClicktoAdvance(){
+		string this_phase = SceneChanger.currentGamePhase;
+
+		if(this_phase == "conversation"){
+			uiItems.speakingNpcContainer.RegisterCallback<ClickEvent>(evt => PlayNextLine());
+		}
+	}
+
 	private void formatRelevantChoices(string choice_text, Choice choice, string choice_tag){
 
 		if(SceneChanger.currentGamePhase == "character-selection"){
@@ -148,10 +171,26 @@ public class DialogueController : MonoBehaviour
 		}
 
 		if(SceneChanger.currentGamePhase == "conversation"){
-			
+			formatDialogueChoice(choice, choice_text);
 		}
 
 	}
+
+	void formatDialogueChoice(Choice choice, string choice_text){
+		string your_choice = fmtTag.getTagProp(choice_text);
+		//uiItems.CreateChoice(your_choice);
+		VisualElement question = new VisualElement();
+        question.AddToClassList("choice-button");
+
+		question.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
+
+        Label question_text = new Label(choice_text);
+        question.Add(question_text);
+
+        uiItems.playerDialogOption.Add(question);
+
+	}
+
 
 	void formatCharSelect(Choice choice, string choice_tag){
 		string this_tag_type = fmtTag.getTagType(choice_tag);
@@ -166,16 +205,9 @@ public class DialogueController : MonoBehaviour
 		}
 		
 		if(this_tag_prop == "vanessa"){
-			uiItems.charKevin.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
+			uiItems.charVanessa.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
 		}
 	}
-
-    void registerClicktoAdvance(Choice choice, string text)
-    {
-        Button leave_gear = new Button() { text = text };
-		
-		leave_gear.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
-    }
 
     public void goToKnot(string knot_name)
 	{
@@ -187,10 +219,16 @@ public class DialogueController : MonoBehaviour
 	private void OnClickChoiceButton(ClickEvent evt, Choice choice) {
 		evt.StopPropagation();
 
-		story.ChooseChoiceIndex (choice.index);	
+		story.ChooseChoiceIndex (choice.index);
 
+		if(SceneChanger.currentGamePhase == "conversation"){
+			uiItems.ClearCharacterText();
+			uiItems.playerDialogOption.Clear();
+		}	
 
-		AdvanceStory();
+		is_choice = false;
+
+		PlayNextLine();
 	}
 
     public void updateInkVar(string varName, int varVal)

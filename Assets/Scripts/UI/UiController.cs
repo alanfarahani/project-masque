@@ -153,5 +153,23 @@ Keep that in mind.";
 
         label.text = text;
     }
+
+    public void ClearCharacterText()
+    {
+        mainContainer.Q("characterText").Clear();
+    }
+
+    public void CreateChoice(string text)
+    {
+        //class: choice-button
+        VisualElement question = new VisualElement();
+        question.AddToClassList("choice-button");
+
+        Label question_text = new Label(text);
+        question.Add(question_text);
+
+        playerDialogOption.Add(question);
+        
+    }
 }
 
