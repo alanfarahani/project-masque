@@ -178,5 +178,22 @@ Keep that in mind.";
         
     }
 
+    public void SwapCharacter(string character)
+    {
+        if(character == "kevin")
+        {
+            character1.style.backgroundImage = new StyleBackground(KevinImg);
+        }
+        if(character == "vanessa")
+        {
+            Debug.Log(character);
+            character1.style.backgroundImage = new StyleBackground(VanessaImg);
+        }
+        if(character == "joanne")
+        {
+            character1.style.backgroundImage = new StyleBackground(JoanneImg);
+        }
+    }
+
 }
 
