@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public class UiController: MonoBehaviour
 {
@@ -41,6 +42,11 @@ Keep that in mind.";
     public VisualElement charJoanne {get; private set;}
     public VisualElement charKevin {get; private set;}
     public VisualElement charVanessa {get; private set;}
+
+    [SerializeField]
+    public Sprite KevinImg;
+    public Sprite VanessaImg;
+    public Sprite JoanneImg;
 
     public void exposeGameStartUI()
     {
@@ -171,5 +177,6 @@ Keep that in mind.";
         playerDialogOption.Add(question);
         
     }
+
 }
 

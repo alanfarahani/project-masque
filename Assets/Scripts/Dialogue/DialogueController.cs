@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Ink.Runtime;
+using JetBrains.Annotations;
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -85,6 +87,7 @@ public class DialogueController : MonoBehaviour
 			//changeScene.clearTextAreas();
 			Debug.Log("Current line " + current_line);
 			Debug.Log("Can story continue?" + story.canContinue);
+			checkMasks();
 
 			//fmtText.formatTextandAdvance(current_line, SceneChangeManager.currentGamePhase);
 
@@ -242,5 +245,26 @@ public class DialogueController : MonoBehaviour
         currentVal++;
         story.variablesState[varName] = currentVal;
     }
+
+	public void checkMasks(){
+		List<string> masks = new List<string>();
+		var Masks = story.variablesState["MASKS"] as Ink.Runtime.InkList;
+		foreach(var item in Masks){
+			var this_item = item.Key.ToString();
+			if(this_item == "MASKS.angry"){
+				uiItems.EnableMask(0);
+			}
+			if(this_item == "MASKS.flirty"){
+				uiItems.EnableMask(3);
+			}
+			if(this_item == "MASKS.brooding"){
+				uiItems.EnableMask(1);
+			}
+			if(this_item == "MASKS.bubbly"){
+				uiItems.EnableMask(3);
+			}
+		};
+		
+	}
 	
 }

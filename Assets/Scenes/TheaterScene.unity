@@ -324,6 +324,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f56131aab24484d8d1c28e8288cd03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UiController
+  KevinImg: {fileID: 1993710755605868245, guid: 37eb5b2c40d805f43bf20dc3e32c3970, type: 3}
+  VanessaImg: {fileID: 0}
+  JoanneImg: {fileID: -7147492911834177937, guid: 84100c65e20502c46be2f51e778bba0e, type: 3}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
