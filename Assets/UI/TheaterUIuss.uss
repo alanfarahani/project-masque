@@ -47,5 +47,17 @@
     scale: 1.05 1.05;
     transition-property: scale;
     transition-timing-function: ease-out;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
 }
+
+.char-selector-bttn {
+    transition-property: scale;
+    transition-timing-function: ease;
+    transition-duration: 0.5s;
+}
+
+.char-selector-bttn:hover {
+    scale: 1.2 1.2;
+}
+
+
