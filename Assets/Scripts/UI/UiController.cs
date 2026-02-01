@@ -186,7 +186,6 @@ Keep that in mind.";
         }
         if(character == "vanessa")
         {
-            Debug.Log(character);
             character1.style.backgroundImage = new StyleBackground(VanessaImg);
         }
         if(character == "joanne")

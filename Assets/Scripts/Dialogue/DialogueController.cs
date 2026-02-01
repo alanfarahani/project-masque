@@ -86,21 +86,21 @@ public class DialogueController : MonoBehaviour
 					string this_tag_type = fmtTag.getTagType(this_tag);
 					string this_tag_prop = fmtTag.getTagProp(this_tag);
 
-					Debug.Log(this_tag);
+					//Debug.Log(this_tag);
 			
 					yield return StartCoroutine(changeScene.SceneChange(this_tag_type, this_tag_prop));
 				}
 			}
 
 			//changeScene.clearTextAreas();
-			Debug.Log("Current line " + current_line);
-			Debug.Log("Can story continue?" + story.canContinue);
+			//Debug.Log("Current line " + current_line);
+			//Debug.Log("Can story continue?" + story.canContinue);
 			checkMasks();
 
 			//fmtText.formatTextandAdvance(current_line, SceneChangeManager.currentGamePhase);
 
 			if(SceneChanger.currentGamePhase == "conversation"){
-				Debug.Log("in conversation");
+				//Debug.Log("in conversation");
 				string this_line = current_line.Trim();
 				uiItems.SetCharacterText(this_line);
 				
@@ -112,7 +112,7 @@ public class DialogueController : MonoBehaviour
 			
 				if (!story.canContinue && story.currentChoices.Count > 0)
 				{
-					Debug.Log("hit choices");
+					//Debug.Log("hit choices");
 					DisplayChoices();
 				}
 				else if(current_line.Trim() == "")
@@ -121,7 +121,7 @@ public class DialogueController : MonoBehaviour
 				}
 				else
 				{
-					Debug.Log("waiting for click");
+					//Debug.Log("waiting for click");
 					registerClicktoAdvance();
 				}
 			}
@@ -144,7 +144,7 @@ public class DialogueController : MonoBehaviour
 						Choice choice = current_choices[i];
 
 						var choice_text = choice.text.Trim();
-						Debug.Log("Choice: " + choice_text);
+						//Debug.Log("Choice: " + choice_text);
 						
 						string choice_tag = "";
 
@@ -152,7 +152,7 @@ public class DialogueController : MonoBehaviour
 							{
 								foreach (string item in choice.tags)
 									{
-										Debug.Log("Choice tags: " + item);
+										//Debug.Log("Choice tags: " + item);
 										choice_tag = item;
 									}	
 							}
