@@ -31,12 +31,16 @@ INCLUDE systems/topic_engine.ink
 -> character_selection
 
 === character_selection
+    #start: character-selection
 
     +[Joanne Jordan] #character: joanne
+        #start: conversation
         -> select(->evaluate_topic) -> joanne
     +[Vanessa Ruiz] #character: vanessa
+        #start: conversation
         -> select(->evaluate_topic) -> vanessa
     +[Kevin Dreezy] #character: kevin
+        #start: conversation
         -> select(-> evaluate_topic) -> kevin
 
 - -> DONE
