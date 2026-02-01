@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class UiController
+public class UiController: MonoBehaviour
 {
     private UIDocument document;
 	
@@ -18,6 +18,8 @@ public class UiController
         mainContainer = document.rootVisualElement.Q("mainContainer");
     }
 
-
-
+    void Awake()
+    {
+        
+    }
 }

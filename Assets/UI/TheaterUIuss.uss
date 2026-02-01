@@ -1,12 +1,13 @@
 :root {
 }
 
-.mask-button {
+.npc-dialog-container {
+    background-color: rgba(34, 79, 165, 0.7);
+    min-height: auto;
+    height: auto;
+    max-height: 200px;
+    width: 90%;
 }
 
-.mask-button:hover {
-    scale: 1.2 1.2;
-    transition-property: scale;
-    transition-timing-function: ease-out;
-    transition-duration: 1s;
+.player-dialog-option {
 }
