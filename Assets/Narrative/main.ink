@@ -9,112 +9,47 @@
             option2: everyone likes you (optimize choices based on character across from you)
 
 */
+INCLUDE helpers/functions.ink
+INCLUDE helpers/variables.ink
 
-LIST MASKS = (flirty), (angry), (brooding), (bubbly), jock, bandgeek, none
+//characters
 
-VAR last_choice = none
+INCLUDE characters/char_joanne.ink
+INCLUDE characters/char_kevin.ink
+INCLUDE characters/char_vanessa.ink
 
-VAR jock_happiness = 0
-VAR jock_unhapiness = 0
+// systems
 
--> the_jock
+INCLUDE systems/sort_algorithms.ink
+INCLUDE systems/assign_value_to_list_item.ink
+INCLUDE systems/topic_engine.ink
 
-=== the_jock ===
+~mass_updt_states(TOPIC_BUCKETS, 0)
 
-    =encounter1
-        JOCK: You're coming to the sportsball game right?
-    
-        ->masks->
-        {last_choice:
-            -angry: YOU: You can't make me do anything I don't want to.
-            -flirty: YOU: WINK.
-            -brooding: YOU: Of course, or like, whatever.
-            -bubbly: YOU: I can't wait! I love sportsball!
-        }
-    
-        {last_choice == bubbly or last_choice == angry: 
-            JOCK: You're the best.
-            ~jock_happiness++
-            -> encounter_jock_crush_team
-        - else:
-            JOCK: Whatever! #char: jock #response: unhappy
-            ~jock_happiness--
-            -> encounter_jock_crush_team
-        }
+~priority_topic = sportsball
 
-    =encounter_jock_crush_team
-        JOCK: We are going to crush the other team!
+-> character_selection
 
-        ->masks->
-        {last_choice:
-            -angry: YOU: Kill 'em!
-            -flirty: YOU: You're SO strong
-            -brooding: YOU: As if
-            -bubbly: YOU: Hehe
-        }
-    
-        {last_choice == flirty or last_choice == brooding: 
-            ~jock_happiness--
-        - else:
-            ~jock_happiness++
-        }
+=== character_selection
 
-        -> encounter_you_1
-    
-    =encounter_you_1
-        ->masks->
-        {last_choice:
-            -angry: YOU: I hate this school
-                -> encounter_school_spirit
-            -flirty: YOU: Are you going to the party, Friday?
-                -> encounter_jack_party
-            -brooding: YOU: ...
-                -> encounter_school_spirit
-            -bubbly: YOU: Are you going to the party, Friday?
-                -> encounter_jack_party
-        }
+    +[Joanne Jordan] #character: joanne
+        -> select(->evaluate_topic) -> joanne
+    +[Vanessa Ruiz] #character: vanessa
+        -> select(->evaluate_topic) -> vanessa
+    +[Kevin Dreezy] #character: kevin
+        -> select(-> evaluate_topic) -> kevin
 
-    =encounter_school_spirit
-        JOCK: Where's the school spirit?
+- -> DONE
 
-        ->masks->
-        {last_choice:
-            -angry: YOU: Up your butt
-                -> encounter_school_spirit
-            -flirty: YOU: Wherever you want it
-                -> encounter_jock_confused
-            -brooding: YOU: Dead... like regular spirits
-                -> encounter_school_spirit
-            -bubbly: YOU: Rah, Rah, Rah!
-                -> encounter_jock_excited
-        }
+=== evaluate_topic
+    +{priority_topic != ()} ->
+        ~current_topic = priority_topic
+        ~priority_topic = ()
+    +{no_cond(sportsball)} ->
+        ~current_topic = sportsball
+    +{no_cond(schooldance)} ->
+        ~current_topic = schooldance
+    +{no_cond(exams)} ->
+        ~current_topic = exams
 
-    =encounter_jack_party
-        JACK: I need my eight hours before game day
-        -> encounter_you_1
-
-    =encounter_jock_confused
-        JOCK: What?
-        -> encounter_you_1
-
-    =encounter_jock_excited
-        JOCK: Let's F'in Go!
-
--> END
-
-=== masks ===
-    +{have_mask(flirty)}[Flirty]
-        ~last_choice = flirty
-    +{have_mask(angry)}[Angry]
-        ~last_choice = angry
-    +{have_mask(brooding)}[Brooding]
-        ~last_choice = brooding
-    +{have_mask(bubbly)}[Bubbly]
-        ~last_choice = bubbly
 - ->->
-
-=== function have_mask(mask)
-    ~return MASKS ? mask
-    
-=== function get_mask(mask)
-    ~ MASKS += mask
