@@ -100,4 +100,3 @@ InitTestScene*.unity*
 
 # Mac auto-gen files
 **/*.DS_Store
-**/*.meta
