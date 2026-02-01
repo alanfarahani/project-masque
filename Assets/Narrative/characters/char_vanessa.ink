@@ -7,6 +7,7 @@
 
     =opening_statement
     VANESSA: Oh, hey!!!
+    // {Oh, hey!!! | {~ Omg! | Omigosh, babe! | Squeee!}}
     - -> your_turn
 
     = their_turn

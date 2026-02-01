@@ -7,6 +7,7 @@
 
     =opening_statement
     JOANNE: Hey, you.
+    //{Hey, you. | {~ Hi again. | Heya!. | Oh, hello.}}
     /*{current_topic:
         - sportsball: 
             -> converse(->sportsball_game)
