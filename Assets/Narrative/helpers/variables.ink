@@ -27,6 +27,6 @@ VAR turns_taken = 0
 VAR topics_covered = ""
 
 // knowledge
-LIST joanne_unlocks = cats, body_image
+LIST joanne_unlocks = cats, body_image, bakery
 LIST vanessa_unlocks = dnd, nerd
 LIST kevin_unlocks = f1, really_cares
