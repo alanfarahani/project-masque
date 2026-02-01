@@ -5,6 +5,12 @@
 === function get_mask(mask)
     ~ MASKS += mask
 
+=== function has_unlock(list, unlock)
+    ~return list ? unlock
+
+=== function get_unlock(ref list, unlock)
+    ~ list += unlock
+
 // knowledge states
 === function reached (knowledge_list, x) 
    ~ return knowledge_list ? x 
@@ -28,7 +34,6 @@
     - else:
       ~ return false || reach(knowledge_list, statesToSet) 
     }
-
 
 // conversation utilities
 === function topic_is(topic)

@@ -25,3 +25,6 @@ VAR StateClearance = ()
 // conversation variables
 VAR turns_taken = 0
 VAR topics_covered = ""
+
+// knowledge
+LIST joanne_unlocks = cats, body_image

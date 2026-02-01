@@ -87,3 +87,12 @@
         }
     - ->->
 - -> DONE
+
+/** 
+Points to uncover:
+[ ] wants to be an astronaut
+[ ] loves D&D
+[ ] scared of ex-boyfriend
+[ ] insecure about being seen as a nerd
+
+**/
