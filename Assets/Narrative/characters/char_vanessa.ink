@@ -20,11 +20,13 @@
     -> DONE
     
     = conversation
-        {not already_saw(->schooldance_bring_someone): ->converse(->schooldance_bring_someone)}
-        {not already_saw(->schooldance_what_wearing): ->converse(->schooldance_what_wearing)}
-        {not already_saw(->schooldance_dnd) and not has_unlock(vanessa_unlocks, dnd): ->converse(->schooldance_dnd)}
-        {not already_saw(->schooldance_nerd) and not has_unlock(vanessa_unlocks, nerd): ->converse(->schooldance_nerd)}
-        
+        {shuffle:
+            - {not already_saw(->schooldance_bring_someone): ->converse(->schooldance_bring_someone)}
+            - {not already_saw(->schooldance_what_wearing): ->converse(->schooldance_what_wearing)}
+            - {not already_saw(->schooldance_dnd): ->converse(->schooldance_dnd)}
+            - {not already_saw(->schooldance_nerd): ->converse(->schooldance_nerd)}
+        }
+
         -> DONE
 
     = converse(->go_to)
@@ -85,7 +87,7 @@
             VANESSA: Regardless, I hope you vote for me for homecoming queen this year.
         +{have_mask(flirty)}[YOU: If you don't want to go with Mr. Homecoming King this year, I could be your date]
             VANESSA: You're sweet, but he won't be happy about that.
-        +{have_mask(brooding)}[YOU: It's alright.]
+        +{have_mask(brooding) and not has_unlock(vanessa_unlocks, dnd)}[YOU: It's alright.]
             VANESSA: Well, as long as I can get your vote for Homecoming Queen.
             VANESSA: I'll kill you if you tell anyone, but you seem cool.
             VANESSA: I'm probably more excited for the next day when I play D&D with my friends.
@@ -104,7 +106,7 @@
             VANESSA: Yeah, it doesn't matter. It's not going to ruin my fun.
         + [YOU: Yeah, I'm going to have to spend extra time studying.]
             VANESSA: That's cute. You try so hard.
-        +{have_mask(flirty)}[YOU: I can help you study, just the two of us]
+        +{have_mask(flirty) and not has_unlock(vanessa_unlocks, nerd)}[YOU: I can help you study, just the two of us]
             VANESSA: Don't be like that.
             VANESSA: Seriously, though, I do need to study.
             VANESSA: No funny business, but just keep it between us.

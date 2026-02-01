@@ -18,11 +18,12 @@
     -> DONE
     
     = conversation
-        {not already_saw(->exams_intro): ->converse(->exams_intro)}
-        {not already_saw(->exams_whatsonit): ->converse(->exams_whatsonit)}
-        /*{not already_saw(->schooldance_intro): ->converse(->schooldance_intro)}
-        {not already_saw(->exams_intro): ->converse(->exams_intro)}
-        */
+        {shuffle:
+            - {not already_saw(->exams_intro): ->converse(->exams_intro)}
+            - {not already_saw(->exams_whatsonit): ->converse(->exams_whatsonit)}
+            - {not already_saw(->exams_failing): ->converse(->exams_failing)}
+            - {not already_saw(->exams_future): ->converse(->exams_future)}
+        }
         
         -> DONE
 
@@ -92,9 +93,6 @@
             KEVIN: <bold>This is serious for me.</bold>
             KEVIN: If I fail, I won't be able to --
             KEVIN: Nevermind.
-            ~get_mask(angry)
-            // play audio
-            // learn_serious
         +{have_mask(flirty)}[YOU: I won't let you fail, WINK.]
             KEVIN: I told you, I'm not interested.
             KEVIN: <bold>This is serious for me.</bold>
@@ -112,23 +110,26 @@
         +[YOU: Pretend to be sick.]
             KEVIN: Wow, why would you say that?
             KEVIN: <bold>My grandma really is sick, you know that?<bold>
-            ~get_mask(angry)
-        +[YOU: Really be sick.]
+        +{not has_unlock(kevin_unlocks, grandma)}[YOU: Really be sick.]
             KEVIN: Wow, why would you say that?
             KEVIN: <bold>My grandma really is sick, you know that?<bold>
-            ~get_mask(angry)
-        +{have_mask(bubbly)}[YOU: Just think about how important this single moment is for shaping your entire future!]
+            ~get_unlock(kevin_unlocks, grandma)
+            ~get_mask(brooding)
+        +{have_mask(bubbly) and not has_unlock(kevin_unlocks, really_cares)}[YOU: Just think about how important this single moment is for shaping your entire future!]
             KEVIN: Not helping. At all.
             KEVIN: You really think the Academy won't take me if I fail? 
             KEVIN: <bold>This is serious for me.</bold>
-            ~get_mask(angry)
+            ~get_unlock(kevin_unlocks, really_cares)
+            ~get_mask(brooding)
             // play audio
-        +{have_mask(flirty)}[YOU: Just pretend the exam is something you really, really like. WINK.]
+        +{have_mask(flirty) and not has_unlock(kevin_unlocks, f1)}[YOU: Just pretend the exam is something you really, really like. WINK.]
             KEVIN: Hmm. You know what I really like?
             KEVIN: <bold>F1 racing.</bold> 
             KEVIN: The precision. The elegance. It's like a </bold>modern dance at high speed.</bold>
             KEVIN: Don't think that changes the exam, though.
             KEVIN: Whatever.
+            ~get_unlock(kevin_unlocks, f1)
+            ~get_mask(brooding)
         +{have_mask(brooding)}[YOU: Just don't try.]
             KEVIN: What are you talking about?
             KEVIN: <bold>This is serious for me.</bold>
@@ -149,8 +150,8 @@
 /** 
 Points to uncover:
 [ ] wants to be a modern dancer
-[ ] live F1
-[ ] scared of grandma dying
-[ ] being seen like he cares
+[x] likes F1
+[x] scared of grandma dying
+[x] being seen like he cares
 
 **/
