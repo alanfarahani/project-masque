@@ -84,6 +84,7 @@ Keep that in mind.";
             case "characterButton2": 
                 SetCharacterText(kevinText);
                 EnableMask(3);
+                MarkCharacterCompleted(2);
                 break;
             default:
                 break;

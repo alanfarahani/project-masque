@@ -2,10 +2,9 @@
 }
 
 .npc-dialog-container {
-    background-color: rgba(34, 79, 165, 0.7);
     min-height: auto;
     height: auto;
-    max-height: 200px;
+    max-height: 500px;
     width: 90%;
 }
 
@@ -47,5 +46,5 @@
     scale: 1.05 1.05;
     transition-property: scale;
     transition-timing-function: ease-out;
-    transition-duration: .5s;
+    transition-duration: 0.5s;
 }

@@ -34,10 +34,10 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="speakingCharBubble" style="flex-grow: 1; position: absolute; width: 705px; height: 851px; background-image: url(&quot;project://database/Assets/Art/UI/panel-border-022.png?fileID=-507163760535440908&amp;guid=ddceeced4c1583b459f824089163a639&amp;type=3#panel-border-022_0&quot;); top: 186px; left: 950px; background-color: rgba(26, 26, 26, 0.73);">
-                <ui:VisualElement name="playerDialogOption" style="flex-grow: 1;">
+                <ui:VisualElement name="speakingNpcContainer" class="npc-dialog-container" style="flex-grow: 1;">
                     <ui:Label name="characterText" text="" style="color: rgb(229, 229, 229); font-size: 32px; white-space: normal; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;"/>
                 </ui:VisualElement>
-                <ui:VisualElement name="speakingNpcContainer" class="npc-dialog-container" style="flex-grow: 1;"/>
+                <ui:VisualElement name="playerDialogOption" style="flex-grow: 1;"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
