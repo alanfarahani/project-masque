@@ -28,3 +28,5 @@ VAR topics_covered = ""
 
 // knowledge
 LIST joanne_unlocks = cats, body_image
+LIST vanessa_unlocks = dnd, nerd
+LIST kevin_unlocks = f1, really_cares
