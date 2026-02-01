@@ -21,6 +21,8 @@ public class DialogueController : MonoBehaviour
 	private SceneChanger changeScene;
 	private UiController uiItems;
 
+	private string lastCharSelected;
+
 	bool is_choice = false;
 	
     void Awake()
@@ -201,15 +203,31 @@ public class DialogueController : MonoBehaviour
 		string this_tag_prop = fmtTag.getTagProp(choice_tag);
 
 		if(this_tag_prop == "joanne"){
-			uiItems.charJoanne.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
+			if(this_tag_prop == lastCharSelected){
+				uiItems.charJoanne.SetEnabled(false);
+			} else{
+				uiItems.charJoanne.SetEnabled(true);
+				uiItems.charJoanne.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
+			}
+			
 		}
 
 		if(this_tag_prop == "kevin"){
-			uiItems.charKevin.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
+			if(this_tag_prop == lastCharSelected){
+				uiItems.charKevin.SetEnabled(false);
+			} else{
+				uiItems.charKevin.SetEnabled(true);
+				uiItems.charKevin.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
+			}
 		}
 		
 		if(this_tag_prop == "vanessa"){
+				if(this_tag_prop == lastCharSelected){
+				uiItems.charVanessa.SetEnabled(false);
+			} else{
+				uiItems.charVanessa.SetEnabled(true);
 			uiItems.charVanessa.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
+			}
 		}
 	}
 
@@ -226,6 +244,8 @@ public class DialogueController : MonoBehaviour
 		story.ChooseChoiceIndex (choice.index);
 
 		uiItems.SwapCharacter(character);
+
+		lastCharSelected = character;
 
 		is_choice = false;
 
