@@ -42,3 +42,10 @@
 .character-button.completed > .completed-icon {
     display: inline;
 }
+
+.character-button:hover {
+    scale: 1.05 1.05;
+    transition-property: scale;
+    transition-timing-function: ease-out;
+    transition-duration: .5s;
+}
