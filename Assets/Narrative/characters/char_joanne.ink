@@ -7,14 +7,15 @@
 
     =opening_statement
     JOANNE: Hey, you.
-    {current_topic:
+    /*{current_topic:
         - sportsball: 
-            -> converse(->sportsball_intro)
+            -> converse(->sportsball_game)
         - schooldance:
             -> converse(->schooldance_intro)
         - exams:
             -> converse(->exams_intro)
     }
+    */
     - -> your_turn
 
     = their_turn
@@ -27,9 +28,11 @@
     -> DONE
     
     = conversation
-        {not already_saw(->sportsball_intro): ->converse(->sportsball_intro)}
-        {not already_saw(->schooldance_intro): ->converse(->schooldance_intro)}
+        {not already_saw(->sportsball_game): ->converse(->sportsball_game)}
+        {not already_saw(->sportsball_doyoulike): ->converse(->sportsball_doyoulike)}
+        /*{not already_saw(->schooldance_intro): ->converse(->schooldance_intro)}
         {not already_saw(->exams_intro): ->converse(->exams_intro)}
+        */
         
         -> DONE
 
@@ -56,65 +59,36 @@
         ~get_mask(flirty)
         - ->->
 
-    = sportsball_intro
-        JOANNE: So, coming to my sportsball game?
-        +[Yes]
-            YOU: I'll be there.
-            JOANNE: Why don't I believe you?
-        +[No]
-            YOU: I won't be there.
+    = sportsball_game
+        JOANNE: So, coming to my big sportsball game?
+        + YOU: Yep, I'll be there.  
+            JOANNE: Of course you'll be there, it's the biggest sportsball game of the year.
+            JOANNE: And I'm starting.
+        +YOU: Nope, not me.
             JOANNE: Is anybody surprised?
-        +{have_mask(flirty)}[Wink at Joanne]
-            ACTION: You wink at Joanne suggestively.
-            JOANNE: Whoa! You trying to tell me something?
-        +{have_mask(angry)}[Scowl at Joanne]
-            ACTION: You scowl at Joanne, making a low growl.
-            JOANNE: That's one way to talk to people!
+        +{have_mask(angry)} YOU: There's more to life than sportsball!
+            JOANNE: Whoa, rude!
+            JOANNE: I mean you're not wrong.
+            
        
     - ->->
 
-    = sportsball_something
+    = sportsball_doyoulike
+        JOANNE: Do you even like sportsball?
+       +[YOU: Who doesn't?]
+           JOANNE: I guess some people, but I don't get what their problem is.
+        +[YOU: Not my thing.]
+            JOANNE: You think you're cool?
+            JOANNE: I'll pretend you didn't just say that.
+        +{have_mask(bubbly)}[YOU: OMG! I super love sportsball!]
 
 
-    - ->->
-
-
-    = schooldance_intro
-    JOANNE: Finally convince someone to take you to the dance?
-       +[Yes]
-            YOU: I did find someone.
-            JOANNE: Bet you didn't.  I've got guys lining up.
-        +[No]
-            YOU: I haven't found anybody yet.
-            JOANNE: Maybe join the sportsball team?
-        +{have_mask(flirty)}[Wink at Joanne]
-            ACTION: You wink at Joanne suggestively.
-            JOANNE: Whoa! You trying to tell me something?
-        +{have_mask(angry)}[Scowl at Joanne]
-            ACTION: You scowl at Joanne, making a low growl.
-            JOANNE: That's one way to talk to people!
-    - ->->
-
-    = exams_intro
-        JOANNE: Need any help with the bio exam?
-       +[Yes]
-            YOU: Whatever help you can give.
-            JOANNE: Yeah right, you'll probably just rip off my hard work.
-        +[No]
-            YOU: I can handle it myself.
-            JOANNE: Not based on what I saw last time.
-        +{have_mask(flirty)}[Flirt with Joanne]
-            YOU: Maybe you could, you know, help me sometime?
-            JOANNE: Yeah, I'm trying to help you by telling you to study.
-        +{have_mask(angry)}[Scowl at Joanne]
-            ACTION: You scowl at Joanne, making a low growl.
-            JOANNE: That's one way to talk to people!
     - ->->
 
     = reactions
         {turns_taken == 2:
-            {joanne == 1: ->gotta_flirt->}
-            JOANNE: Anyway, I'm good for now.  
+            {joanne == 1 and not have_mask(flirty): ->gotta_flirt->}
+            JOANNE: I've gotta go.  
             JOANNE: Later.
             -> character_selection
         }
