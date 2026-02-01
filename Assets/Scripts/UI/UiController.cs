@@ -30,17 +30,36 @@ Keep that in mind.";
 
 	//game start is really debug, TODO update this
 	public VisualElement mainContainer { get; private set; }
+    public VisualElement character1 {get; private set;}
+    public VisualElement speakingNpcContainer {get; private set;}
+    public VisualElement playerDialogOption {get; private set;}
+
+    public VisualElement charSelectionContainer {get; private set;}
+
+    public VisualElement conversationContainer {get; private set;}
 
     public void exposeGameStartUI()
     {
-        mainContainer = GetComponent<UIDocument>().rootVisualElement.Q("mainContainer");
+        document = GetComponent<UIDocument>();
+
+        mainContainer = document.rootVisualElement.Q("mainContainer");
+
+        character1 = document.rootVisualElement.Q("character1");
+        
+        speakingNpcContainer = document.rootVisualElement.Q("speakingNpcContainer");
+
+        playerDialogOption = document.rootVisualElement.Q("playerDialogOption");
+
+        charSelectionContainer = document.rootVisualElement.Q("charSelectionContainer");
+
+        conversationContainer = document.rootVisualElement.Q("conversationContainer");
     }
 
     void Awake()
     {
         exposeGameStartUI();
 
-        SetCharacterText(chooseCharacterText);
+        //SetCharacterText(chooseCharacterText);
 
         mainContainer.RegisterCallback<ClickEvent>(evt =>
         {            
