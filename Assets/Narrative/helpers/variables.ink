@@ -1,5 +1,5 @@
 
-LIST MASKS = flirty, angry, brooding, bubbly, jock, bandgeek, none
+LIST MASKS = flirty, angry, brooding, bubbly, jock, bandgeek, cool, none
 
 LIST CHARACTERS = JOANNE, VANESSA, KEVIN
 
