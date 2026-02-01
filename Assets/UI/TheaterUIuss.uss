@@ -48,3 +48,29 @@
     transition-timing-function: ease-out;
     transition-duration: 0.5s;
 }
+
+.choice-button {
+    background-color: rgb(207, 20, 20);
+    background-image: url("project://database/Assets/Art/UI/panel-border-005.png?fileID=6362706393618368774&guid=18bd411e6e8a9cd40aa93b05bf5d6aef&type=3#panel-border-005_0");
+    background-size: 100% 50%;
+    height: 5px;
+    transition-duration: 0.1s;
+    min-height: 20%;
+    max-height: 10%;
+    position: relative;
+}
+
+.choice-button:hover {
+    transition-duration: 0.1s;
+    background-color: rgb(255, 209, 184);
+}
+
+.char-selector-bttn {
+    transition-property: scale;
+    transition-timing-function: ease;
+    transition-duration: 0.5s;
+}
+
+.char-selector-bttn:hover {
+    scale: 1.2 1.2;
+}

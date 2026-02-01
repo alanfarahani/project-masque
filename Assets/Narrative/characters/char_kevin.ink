@@ -118,7 +118,7 @@
             KEVIN: <bold>My grandma really is sick, you know that?<bold>
             ~get_mask(angry)
         +{have_mask(bubbly)}[YOU: Just think about how important this single moment is for shaping your entire future!]
-            KEVIN: Not helping.
+            KEVIN: Not helping. At all.
             KEVIN: You really think the Academy won't take me if I fail? 
             KEVIN: <bold>This is serious for me.</bold>
             ~get_mask(angry)
