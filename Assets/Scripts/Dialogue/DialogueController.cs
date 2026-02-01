@@ -6,12 +6,14 @@ using JetBrains.Annotations;
 using Unity.VectorGraphics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 public class DialogueController : MonoBehaviour
 {
    	[SerializeField]
 	private TextAsset inkJSONAsset = null;
+	public AudioClip[] gameSFX;
 
     public Story story;
     public static event Action<Story> OnCreateStory;
@@ -20,6 +22,8 @@ public class DialogueController : MonoBehaviour
 	private TagOperations fmtTag;
 	private SceneChanger changeScene;
 	private UiController uiItems;
+
+	private AudioSource audioSource;
 
 	private string lastCharSelected;
 
@@ -31,6 +35,7 @@ public class DialogueController : MonoBehaviour
 		animElem = new ElemAnims();
 		changeScene = new SceneChanger(this);
 		uiItems = GameObject.FindGameObjectsWithTag("mainUI")[0].GetComponent<UiController>();
+		audioSource = GetComponent<AudioSource>();
 
         StartGame();
     }
@@ -98,6 +103,9 @@ public class DialogueController : MonoBehaviour
 				Debug.Log("in conversation");
 				string this_line = current_line.Trim();
 				uiItems.SetCharacterText(this_line);
+				
+				audioSource.clip = gameSFX[2];
+		        audioSource.Play();				
 			}
 
 			//CheckNullText();
@@ -192,6 +200,7 @@ public class DialogueController : MonoBehaviour
 
         Label question_text = new Label(choice_text);
         question.Add(question_text);
+		question.AddToClassList("wrap-label");
 
         uiItems.playerDialogOption.Add(question);
 
@@ -205,8 +214,13 @@ public class DialogueController : MonoBehaviour
 		if(this_tag_prop == "joanne"){
 			if(this_tag_prop == lastCharSelected){
 				uiItems.charJoanne.SetEnabled(false);
+				var gray_out = new FilterFunction(FilterFunctionType.Grayscale);
+				gray_out.AddParameter(new FilterParameter(50.0f));
+
+				uiItems.charJoanne.style.filter = new List<FilterFunction> { gray_out };
 			} else{
 				uiItems.charJoanne.SetEnabled(true);
+				uiItems.charJoanne.style.filter = new List<FilterFunction>();
 				uiItems.charJoanne.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
 			}
 			
@@ -215,8 +229,13 @@ public class DialogueController : MonoBehaviour
 		if(this_tag_prop == "kevin"){
 			if(this_tag_prop == lastCharSelected){
 				uiItems.charKevin.SetEnabled(false);
+					var gray_out = new FilterFunction(FilterFunctionType.Grayscale);
+					gray_out.AddParameter(new FilterParameter(50.0f));
+
+					uiItems.charKevin.style.filter = new List<FilterFunction> { gray_out };
 			} else{
 				uiItems.charKevin.SetEnabled(true);
+				uiItems.charKevin.style.filter = new List<FilterFunction>();
 				uiItems.charKevin.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
 			}
 		}
@@ -224,8 +243,13 @@ public class DialogueController : MonoBehaviour
 		if(this_tag_prop == "vanessa"){
 				if(this_tag_prop == lastCharSelected){
 				uiItems.charVanessa.SetEnabled(false);
+				var gray_out = new FilterFunction(FilterFunctionType.Grayscale);
+				gray_out.AddParameter(new FilterParameter(50.0f));
+
+				uiItems.charVanessa.style.filter = new List<FilterFunction> { gray_out };
 			} else{
 				uiItems.charVanessa.SetEnabled(true);
+				uiItems.charVanessa.style.filter = new List<FilterFunction>();
 			uiItems.charVanessa.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
 			}
 		}
@@ -249,6 +273,9 @@ public class DialogueController : MonoBehaviour
 
 		is_choice = false;
 
+		audioSource.clip = gameSFX[0];
+        audioSource.Play();
+
 		PlayNextLine();
 	}
 
@@ -257,10 +284,13 @@ public class DialogueController : MonoBehaviour
 
 		story.ChooseChoiceIndex (choice.index);
 
+		audioSource.clip = gameSFX[0];
+		audioSource.Play();		
+
 		if(SceneChanger.currentGamePhase == "conversation"){
 			uiItems.ClearCharacterText();
 			uiItems.playerDialogOption.Clear();
-		}	
+		}
 
 		is_choice = false;
 
@@ -284,20 +314,30 @@ public class DialogueController : MonoBehaviour
 		var Masks = story.variablesState["MASKS"] as Ink.Runtime.InkList;
 		foreach(var item in Masks){
 			var this_item = item.Key.ToString();
+			
 			if(this_item == "MASKS.angry"){
 				uiItems.EnableMask(0);
+				maskUnlockSound();
 			}
 			if(this_item == "MASKS.flirty"){
 				uiItems.EnableMask(3);
+				maskUnlockSound();
 			}
 			if(this_item == "MASKS.brooding"){
 				uiItems.EnableMask(1);
+				maskUnlockSound();
 			}
 			if(this_item == "MASKS.bubbly"){
 				uiItems.EnableMask(3);
+				maskUnlockSound();
 			}
 		};
 		
+	}
+
+	private void maskUnlockSound(){
+		audioSource.clip = gameSFX[1];
+        audioSource.Play();
 	}
 	
 }
