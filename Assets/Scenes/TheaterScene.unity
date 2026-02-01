@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UiController
   KevinImg: {fileID: 1993710755605868245, guid: 37eb5b2c40d805f43bf20dc3e32c3970, type: 3}
-  VanessaImg: {fileID: 0}
+  VanessaImg: {fileID: -674092465207539140, guid: 9b5e0b4058267604eb1c8d1a64fb540c, type: 3}
   JoanneImg: {fileID: -7147492911834177937, guid: 84100c65e20502c46be2f51e778bba0e, type: 3}
 --- !u!1 &619394800
 GameObject:

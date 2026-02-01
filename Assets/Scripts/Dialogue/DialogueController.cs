@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Ink.Runtime;
 using JetBrains.Annotations;
 using Unity.VectorGraphics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -200,15 +201,15 @@ public class DialogueController : MonoBehaviour
 		string this_tag_prop = fmtTag.getTagProp(choice_tag);
 
 		if(this_tag_prop == "joanne"){
-			uiItems.charJoanne.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
+			uiItems.charJoanne.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
 		}
 
 		if(this_tag_prop == "kevin"){
-			uiItems.charKevin.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
+			uiItems.charKevin.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
 		}
 		
 		if(this_tag_prop == "vanessa"){
-			uiItems.charVanessa.RegisterCallback<ClickEvent>(evt => OnClickChoiceButton(evt, choice));
+			uiItems.charVanessa.RegisterCallback<ClickEvent>(evt => OnClickCharButton(evt, choice, this_tag_prop));
 		}
 	}
 
@@ -217,6 +218,18 @@ public class DialogueController : MonoBehaviour
 		story.ChoosePathString(knot_name);
         AdvanceStory();
 
+	}
+
+	private void OnClickCharButton(ClickEvent evt, Choice choice, string character){
+		evt.StopPropagation();
+
+		story.ChooseChoiceIndex (choice.index);
+
+		uiItems.SwapCharacter(character);
+
+		is_choice = false;
+
+		PlayNextLine();
 	}
 
 	private void OnClickChoiceButton(ClickEvent evt, Choice choice) {
