@@ -11,3 +11,34 @@
 
 .player-dialog-option {
 }
+
+.hidden {
+    display: none;
+}
+
+.character-button {
+    margin-left: 10px;
+    background-color: rgb(169, 169, 169);
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.selected-icon {
+    display: none;
+}
+
+.completed-icon {
+    display: none;
+}
+
+.character-button.selected > .selected-icon {
+    display: inline;
+}
+
+.character-button.completed > .completed-icon {
+    display: inline;
+}
